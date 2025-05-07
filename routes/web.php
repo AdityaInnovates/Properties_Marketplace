@@ -13,6 +13,10 @@ Route::get('/properties', function () {
     return Inertia::render('PropertiesPage');
 })->name('properties');
 
+Route::get('/contact', function () {
+    return Inertia::render('ContactFormPage');
+})->name('contact');
+
 Route::get('/properties/create', function () {
     return Inertia::render('CreatePropertyPage');
 })->name('properties.create');

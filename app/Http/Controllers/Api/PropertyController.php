@@ -74,7 +74,7 @@ class PropertyController extends Controller
     // List all properties with pagination
     public function index()
     {
-        $properties = Property::paginate(9);
+        $properties = Property::orderBy('created_at', 'desc')->paginate(9);
         return response()->json($properties);
     }
 

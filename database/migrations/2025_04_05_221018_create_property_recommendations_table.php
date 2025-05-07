@@ -9,10 +9,10 @@ class CreatePropertyRecommendationsTable extends Migration
     public function up()
     {
         Schema::create('property_recommendations', function (Blueprint $table) {
-            $table->id(); // SERIAL PRIMARY KEY
-            $table->unsignedBigInteger('property_id'); // Foreign key to properties
-            $table->jsonb('recommendations'); // JSONB for storing recommendations
-            $table->timestamps(); // created_at, updated_at
+            $table->id();
+            $table->unsignedBigInteger('property_id');
+            $table->jsonb('recommendations');
+            $table->timestamps();
 
             $table->foreign('property_id')
                   ->references('id')

@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Building, Home, Plus } from 'lucide-react';
+import { Building, Home, Mail, Plus } from 'lucide-react';
 
 function HomePage() {
     return (
@@ -29,6 +29,14 @@ function HomePage() {
                     <Plus className="text-primary mb-4 h-12 w-12" />
                     <h2 className="text-xl font-semibold">Create Listing</h2>
                     <p className="text-muted-foreground mt-2 text-center">Add a new property listing to the marketplace</p>
+                </Link>
+                <Link
+                    href={"/contact"}
+                    className="flex flex-col items-center justify-center rounded-lg border p-8 shadow-sm transition-shadow hover:shadow-md"
+                >
+                    <Mail className="text-primary mb-4 h-12 w-12" />
+                    <h2 className="text-xl font-semibold">Contact Us</h2>
+                    <p className="text-muted-foreground mt-2 text-center">Have questions? Get in touch with our team</p>
                 </Link>
             </div>
         </div>

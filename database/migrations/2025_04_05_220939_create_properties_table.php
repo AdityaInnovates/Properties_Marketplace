@@ -9,13 +9,13 @@ class CreatePropertiesTable extends Migration
     public function up()
     {
         Schema::create('properties', function (Blueprint $table) {
-            $table->id(); // SERIAL PRIMARY KEY
-            $table->integer('agent_id'); // INTEGER, placeholder for foreign key
-            $table->string('title'); // VARCHAR, required
-            $table->text('description')->nullable(); // TEXT, optional
-            $table->decimal('price', 10, 2); // NUMERIC
-            $table->string('address'); // VARCHAR
-            $table->timestamps(); // created_at, updated_at
+            $table->id();
+            $table->integer('agent_id');
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->string('address');
+            $table->timestamps();
         });
     }
 

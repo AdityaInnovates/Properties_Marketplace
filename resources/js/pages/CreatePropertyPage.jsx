@@ -41,8 +41,6 @@ function CreatePropertyPage() {
         try {
             await axios.post('/api/properties', formData);
             toast.success('Property listing created successfully');
-            // Redirect to properties page after successful creation
-            // window.location.href = '/properties';
             router.visit(route('properties'));
         } catch (error) {
             toast.error(error.response?.data?.message);
