@@ -4,6 +4,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { ArrowLeft, Building, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -37,26 +38,30 @@ function PropertyDetailPage() {
 
     if (loading) {
         return (
-            <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
-                <Loader2 className="text-primary mb-4 h-8 w-8 animate-spin" />
-                <p>Loading property details...</p>
-            </div>
+            <Layout title="Property Details">
+                <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
+                    <Loader2 className="text-primary mb-4 h-8 w-8 animate-spin" />
+                    <p>Loading property details...</p>
+                </div>
+            </Layout>
         );
     }
 
     if (error || !property) {
         return (
-            <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
-                <p className="mb-4 text-red-500">{error || 'Property not found'}</p>
-                <Link href={route('properties')}>
-                    <Button>Back to Properties</Button>
-                </Link>
-            </div>
+            <Layout title="Property Not Found">
+                <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
+                    <p className="mb-4 text-red-500">{error || 'Property not found'}</p>
+                    <Link href={route('properties')}>
+                        <Button>Back to Properties</Button>
+                    </Link>
+                </div>
+            </Layout>
         );
     }
 
     return (
-        <>
+        <Layout title={property.title}>
             <Head title={property.title} />
 
             <div className="container mx-auto px-4 py-8">
@@ -150,7 +155,7 @@ function PropertyDetailPage() {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     );
 }
 

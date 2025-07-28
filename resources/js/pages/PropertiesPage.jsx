@@ -4,6 +4,7 @@ import { Link, router } from '@inertiajs/react';
 import axios from 'axios';
 import { ArrowLeft, Badge, Bookmark, BookMarkedIcon, Filter, Loader2, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Checkbox } from '../components/ui/checkbox';
@@ -32,7 +33,6 @@ function PropertiesPage() {
         { id: 'townhouse', label: 'Townhouse' },
     ];
 
-    // Bedroom options
     const bedroomOptions = [
         { id: '1', label: '1 Bedroom' },
         { id: '2', label: '2 Bedrooms' },
@@ -100,7 +100,6 @@ function PropertiesPage() {
             result = result.filter((property) => currentBookmarkedProperties.includes(property.id));
         }
 
-        // Filter by search query
         if (filters.searchQuery) {
             const query = filters.searchQuery.toLowerCase();
             result = result.filter(
@@ -141,76 +140,79 @@ function PropertiesPage() {
 
     if (loading && properties.length === 0) {
         return (
-            <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
-                <Loader2 className="text-primary mb-4 h-8 w-8 animate-spin" />
-                <p>Loading properties...</p>
-            </div>
+            <Layout title="Properties">
+                <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4 py-8">
+                    <Loader2 className="text-primary mb-4 h-8 w-8 animate-spin" />
+                    <p>Loading properties...</p>
+                </div>
+            </Layout>
         );
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <Link href={route('home')} className="text-primary mb-6 flex items-center">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Dashboard
-            </Link>
-            <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-                <h1 className="text-2xl font-bold">Property Listings</h1>
-                <div className="flex w-full flex-col gap-3 sm:flex-row md:w-auto">
-                    <div className="relative flex-1 sm:max-w-xs">
-                        <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
-                        <Input
-                            type="search"
-                            placeholder="Search properties..."
-                            className="pl-8"
-                            value={filters.searchQuery}
-                            onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
-                        />
-                        {filters.searchQuery && (
-                            <button
-                                onClick={() => handleFilterChange('searchQuery', '')}
-                                className="text-muted-foreground hover:text-foreground absolute top-2.5 right-2.5"
-                            >
-                                <X className="h-4 w-4" />
-                            </button>
-                        )}
-                    </div>
-                    {
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant="outline" className="flex items-center gap-2">
-                                    <Filter className="h-4 w-4" />
-                                    Filters
-                                    {activeFilters > 0 && (
-                                        <Badge variant="secondary" className="ml-1 h-5 w-5 rounded-full p-0 text-xs">
-                                            {activeFilters}
-                                        </Badge>
-                                    )}
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent className="sm:max-w-md">
-                                <SheetHeader>
-                                    <SheetTitle>Filter Properties</SheetTitle>
-                                    <SheetDescription>Refine your property search with these filters.</SheetDescription>
-                                </SheetHeader>
-                                <div className="mx-[1rem] grid gap-6 py-6">
-                                    <div className="space-y-4">
-                                        <h3 className="text-sm leading-none font-medium">Price Range</h3>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-sm">{formatPrice(filters.priceRange[0])}</span>
-                                            <span className="text-sm">{formatPrice(filters.priceRange[1])}</span>
+        <Layout title="Browse Properties">
+            <div className="container mx-auto px-4 py-8">
+                <Link href={route('home')} className="text-primary mb-6 flex items-center">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Dashboard
+                </Link>
+                <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+                    <h1 className="text-2xl font-bold">Property Listings</h1>
+                    <div className="flex w-full flex-col gap-3 sm:flex-row md:w-auto">
+                        <div className="relative flex-1 sm:max-w-xs">
+                            <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
+                            <Input
+                                type="search"
+                                placeholder="Search properties..."
+                                className="pl-8"
+                                value={filters.searchQuery}
+                                onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
+                            />
+                            {filters.searchQuery && (
+                                <button
+                                    onClick={() => handleFilterChange('searchQuery', '')}
+                                    className="text-muted-foreground hover:text-foreground absolute top-2.5 right-2.5"
+                                >
+                                    <X className="h-4 w-4" />
+                                </button>
+                            )}
+                        </div>
+                        {
+                            <Sheet>
+                                <SheetTrigger asChild>
+                                    <Button variant="outline" className="flex items-center gap-2">
+                                        <Filter className="h-4 w-4" />
+                                        Filters
+                                        {activeFilters > 0 && (
+                                            <Badge variant="secondary" className="ml-1 h-5 w-5 rounded-full p-0 text-xs">
+                                                {activeFilters}
+                                            </Badge>
+                                        )}
+                                    </Button>
+                                </SheetTrigger>
+                                <SheetContent className="sm:max-w-md">
+                                    <SheetHeader>
+                                        <SheetTitle>Filter Properties</SheetTitle>
+                                        <SheetDescription>Refine your property search with these filters.</SheetDescription>
+                                    </SheetHeader>
+                                    <div className="mx-[1rem] grid gap-6 py-6">
+                                        <div className="space-y-4">
+                                            <h3 className="text-sm leading-none font-medium">Price Range</h3>
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-sm">{formatPrice(filters.priceRange[0])}</span>
+                                                <span className="text-sm">{formatPrice(filters.priceRange[1])}</span>
+                                            </div>
+                                            <Slider
+                                                defaultValue={[0, 2000000]}
+                                                min={0}
+                                                max={2000000}
+                                                step={50000}
+                                                value={filters.priceRange}
+                                                onValueChange={(value) => handleFilterChange('priceRange', value)}
+                                            />
                                         </div>
-                                        <Slider
-                                            defaultValue={[0, 2000000]}
-                                            min={0}
-                                            max={2000000}
-                                            step={50000}
-                                            value={filters.priceRange}
-                                            onValueChange={(value) => handleFilterChange('priceRange', value)}
-                                        />
-                                    </div>
 
-                                    {/* <div className="space-y-4">
+                                        {/* <div className="space-y-4">
                                     <h3 className="text-sm leading-none font-medium">Property Type</h3>
                                     <div className="grid grid-cols-2 gap-3">
                                         {propertyTypes.map((type) => (
@@ -235,7 +237,7 @@ function PropertiesPage() {
                                     </div>
                                 </div> */}
 
-                                    {/* <div className="space-y-4">
+                                        {/* <div className="space-y-4">
                                     <h3 className="text-sm leading-none font-medium">Bedrooms</h3>
                                     <div className="grid grid-cols-2 gap-3">
                                         {bedroomOptions.map((option) => (
@@ -260,99 +262,102 @@ function PropertiesPage() {
                                     </div>
                                 </div> */}
 
-                                    <div className="space-y-4">
-                                        <div className="flex items-center space-x-2">
-                                            <Checkbox
-                                                id="bookmarked"
-                                                checked={filters.showBookmarkedOnly}
-                                                onCheckedChange={(checked) => {
-                                                    handleFilterChange('showBookmarkedOnly', !!checked);
-                                                }}
-                                            />
-                                            <Label htmlFor="bookmarked">Show bookmarked properties only</Label>
+                                        <div className="space-y-4">
+                                            <div className="flex items-center space-x-2">
+                                                <Checkbox
+                                                    id="bookmarked"
+                                                    checked={filters.showBookmarkedOnly}
+                                                    onCheckedChange={(checked) => {
+                                                        handleFilterChange('showBookmarkedOnly', !!checked);
+                                                    }}
+                                                />
+                                                <Label htmlFor="bookmarked">Show bookmarked properties only</Label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <SheetFooter className="flex flex-row gap-3 sm:justify-between">
-                                    <Button variant="outline" onClick={resetFilters}>
-                                        Reset Filters
-                                    </Button>
-                                    <SheetClose>
-                                        <Button onClick={() => applyFilters(properties)}>Apply Filters</Button>
-                                    </SheetClose>
-                                </SheetFooter>
-                            </SheetContent>
-                        </Sheet>
-                    }
-                    <Link href={route('properties.create')}>
-                        <Button>Create New Listing</Button>
-                    </Link>
+                                    <SheetFooter className="flex flex-row gap-3 sm:justify-between">
+                                        <Button variant="outline" onClick={resetFilters}>
+                                            Reset Filters
+                                        </Button>
+                                        <SheetClose>
+                                            <Button onClick={() => applyFilters(properties)}>Apply Filters</Button>
+                                        </SheetClose>
+                                    </SheetFooter>
+                                </SheetContent>
+                            </Sheet>
+                        }
+                        <Link href={route('properties.create')}>
+                            <Button>Create New Listing</Button>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {filteredProperties.map((property) => (
+                        <div key={property.id} onClick={() => router.visit(route('properties.show', property.id))}>
+                            <Card className="transition-300 h-full transition-all duration-300 hover:bg-[rgba(38,38,38,0.3)] hover:shadow-md">
+                                <CardHeader>
+                                    <div className="flex items-center justify-between">
+                                        <CardTitle className="line-clamp-1">{property.title}</CardTitle>
+                                        <div className="cursor-pointer">
+                                            {currentBookmarkedProperties.includes(property.id) ? (
+                                                <BookMarkedIcon
+                                                    onClick={(el) => {
+                                                        el.stopPropagation();
+                                                        var currentBookmarkedProperties =
+                                                            JSON.parse(localStorage.getItem('bookmarked_properties')) || [];
+                                                        currentBookmarkedProperties = currentBookmarkedProperties.filter((el) => el != property.id);
+                                                        localStorage.setItem('bookmarked_properties', JSON.stringify(currentBookmarkedProperties));
+                                                        setcurrentBookmarkedProperties(currentBookmarkedProperties);
+                                                    }}
+                                                />
+                                            ) : (
+                                                <Bookmark
+                                                    onClick={(el) => {
+                                                        el.stopPropagation();
+                                                        var currentBookmarkedProperties =
+                                                            JSON.parse(localStorage.getItem('bookmarked_properties')) || [];
+                                                        currentBookmarkedProperties.push(property.id);
+                                                        localStorage.setItem('bookmarked_properties', JSON.stringify(currentBookmarkedProperties));
+                                                        setcurrentBookmarkedProperties(currentBookmarkedProperties);
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="mb-2 text-2xl font-bold">${property.price.toLocaleString()}</p>
+                                    <p className="text-muted-foreground mb-2">{property.address}</p>
+                                    <p className="line-clamp-3">{property.description}</p>
+                                </CardContent>
+                                <CardFooter>
+                                    <p className="text-muted-foreground text-sm">Listed on {new Date(property.created_at).toDateString()}</p>
+                                </CardFooter>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-8 flex justify-center">
+                    <nav className="flex items-center space-x-2">
+                        <Button variant="outline" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                            Previous
+                        </Button>
+
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                            <Button key={page} variant={currentPage === page ? 'default' : 'outline'} onClick={() => handlePageChange(page)}>
+                                {page}
+                            </Button>
+                        ))}
+
+                        <Button variant="outline" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+                            Next
+                        </Button>
+                    </nav>
                 </div>
             </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredProperties.map((property) => (
-                    <div key={property.id} onClick={() => router.visit(route('properties.show', property.id))}>
-                        <Card className="transition-300 h-full transition-all duration-300 hover:bg-[rgba(38,38,38,0.3)] hover:shadow-md">
-                            <CardHeader>
-                                <div className="flex items-center justify-between">
-                                    <CardTitle className="line-clamp-1">{property.title}</CardTitle>
-                                    <div className="cursor-pointer">
-                                        {currentBookmarkedProperties.includes(property.id) ? (
-                                            <BookMarkedIcon
-                                                onClick={(el) => {
-                                                    el.stopPropagation();
-                                                    var currentBookmarkedProperties = JSON.parse(localStorage.getItem('bookmarked_properties')) || [];
-                                                    currentBookmarkedProperties = currentBookmarkedProperties.filter((el) => el != property.id);
-                                                    localStorage.setItem('bookmarked_properties', JSON.stringify(currentBookmarkedProperties));
-                                                    setcurrentBookmarkedProperties(currentBookmarkedProperties);
-                                                }}
-                                            />
-                                        ) : (
-                                            <Bookmark
-                                                onClick={(el) => {
-                                                    el.stopPropagation();
-                                                    var currentBookmarkedProperties = JSON.parse(localStorage.getItem('bookmarked_properties')) || [];
-                                                    currentBookmarkedProperties.push(property.id);
-                                                    localStorage.setItem('bookmarked_properties', JSON.stringify(currentBookmarkedProperties));
-                                                    setcurrentBookmarkedProperties(currentBookmarkedProperties);
-                                                }}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="mb-2 text-2xl font-bold">${property.price.toLocaleString()}</p>
-                                <p className="text-muted-foreground mb-2">{property.address}</p>
-                                <p className="line-clamp-3">{property.description}</p>
-                            </CardContent>
-                            <CardFooter>
-                                <p className="text-muted-foreground text-sm">Listed on {new Date(property.created_at).toDateString()}</p>
-                            </CardFooter>
-                        </Card>
-                    </div>
-                ))}
-            </div>
-
-            <div className="mt-8 flex justify-center">
-                <nav className="flex items-center space-x-2">
-                    <Button variant="outline" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                        Previous
-                    </Button>
-
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <Button key={page} variant={currentPage === page ? 'default' : 'outline'} onClick={() => handlePageChange(page)}>
-                            {page}
-                        </Button>
-                    ))}
-
-                    <Button variant="outline" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                        Next
-                    </Button>
-                </nav>
-            </div>
-        </div>
+        </Layout>
     );
 }
 

@@ -8,6 +8,9 @@ Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');
 
+Route::get('/auth', function () {
+    return Inertia::render('AuthPage');
+})->name('auth');
 
 Route::get('/properties', function () {
     return Inertia::render('PropertiesPage');
@@ -27,6 +30,14 @@ Route::get('/properties/{id}', function ($id) {
     ]);
 })->name('properties.show');
 
+Route::get('/bookmarks', function () {
+    return Inertia::render('BookmarksPage');
+})->name('bookmarks');
+
+Route::get('/profile', function () {
+    return Inertia::render('ProfilePage');
+})->name('profile');
+
 
 
 
@@ -36,6 +47,6 @@ Route::get('/properties/{id}', function ($id) {
 //     })->name('dashboard');
 // });
 
-// require __DIR__.'/settings.php';
+require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';
 // require __DIR__.'/api.php';
