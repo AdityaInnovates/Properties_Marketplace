@@ -14,11 +14,11 @@ A modern property listing application built with Laravel 12, React 19, TypeScrip
 - 🧪 Testing with Pest PHP
  
 ## Prerequisites
-
+ 
 - PHP 8.2 or higher
-- Node.js 18.0 or higher
-- Composer
-- MySQL/PostgreSQL
+- Node.js 18.0 or higher 
+- Composer 
+- MySQL/PostgreSQL 
 
 ## Installation
 
