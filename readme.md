@@ -5,14 +5,14 @@ A modern property listing application built with Laravel 12, React 19, TypeScrip
 ## Features
 
 - 🏠 Property listing management
-- 🎨 Modern UI with Tailwind CSS and Radix UI components
-- 🔒 Authentication and authorization
-- 📱 Responsive design
+- 🎨 Modern UI with Tailwind CSS and Radix UI components 
+- 🔒 Authentication and authorization 
+- 📱 Responsive design 
 - 🚀 Server-side rendering (SSR) support
-- 🔍 API documentation with Swagger/OpenAPI
+- 🔍 API documentation with Swagger/OpenAPI 
 - ✨ Type-safe development with TypeScript
 - 🧪 Testing with Pest PHP
-
+ 
 ## Prerequisites
 
 - PHP 8.2 or higher
