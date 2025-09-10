@@ -3,14 +3,14 @@
 A modern property listing application built with Laravel 12, React 19, TypeScript, and Tailwind CSS. This project uses Inertia.js for seamless server-side rendering and client-side navigation.
 
 ## Features
-
+  
 - 🏠 Property listing management
-- 🎨 Modern UI with Tailwind CSS and Radix UI components 
+- 🎨 Modern UI with Tailwind CSS and Radix UI components   
 - 🔒 Authentication and authorization 
 - 📱 Responsive design 
-- 🚀 Server-side rendering (SSR) support
+- 🚀 Server-side rendering (SSR) support  
 - 🔍 API documentation with Swagger/OpenAPI 
-- ✨ Type-safe development with TypeScript
+- ✨ Type-safe development with TypeScript 
 - 🧪 Testing with Pest PHP
  
 ## Prerequisites
